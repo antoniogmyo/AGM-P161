@@ -25,5 +25,5 @@ production:
   timeout: 5000
   username: root
   password: new-password
-  host: localhost
+  host: 10.0.0.2
 

@@ -13,11 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160212133311) do
 
-  create_table "tabla1", id: false, force: true do |t|
-    t.integer "id"
-    t.string  "data"
-  end
-
   create_table "textos", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
