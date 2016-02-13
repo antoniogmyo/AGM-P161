@@ -2,7 +2,7 @@
 #
 # rails_server
 #
-# chkconfig: - 85 15
+# chkconfig: - 99 15
 # description: Start the rails web server 
 #
 
