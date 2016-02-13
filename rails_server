@@ -1,0 +1,47 @@
+#!/bin/bash
+#
+# rails_server
+#
+# chkconfig: - 85 15
+# description: Start the rails web server 
+#
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Path to the apachectl script, server binary, and short-form for messages.
+
+prog="Rails_Server"
+
+start() {
+        echo -n $"Starting $prog: "
+	cd  /vagrant/AGM-P161
+        sudo su - vagrant -c "/vagrant/AGM-P161/bin/rails server -e production -d"
+        RETVAL=$?
+        return $RETVAL
+}
+
+stop() {
+	echo -n $"Stopping $prog: "
+	kill -9  `cat /vagrant/AGM-P161/tmp/pids/server.pid`
+	RETVAL=$?
+}
+
+# See how we were called.
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart)
+	stop
+	start
+	;;
+  *)
+	echo $"Usage: $prog {start|stop|restart}"
+	RETVAL=2
+esac
+
+exit $RETVAL
