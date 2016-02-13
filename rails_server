@@ -9,13 +9,20 @@
 # Source function library.
 . /etc/rc.d/init.d/functions
 
-# Path to the apachectl script, server binary, and short-form for messages.
-
 prog="Rails_Server"
 
 start() {
         echo -n $"Starting $prog: "
-	cd  /vagrant/AGM-P161
+        while !(mysql -u root --password='new-password' -e "show databases" -h 10.0.0.2 mysql); do
+                echo DB still not up, retrying....
+                sleep 5
+        done
+
+        while [ ! -d /vagrant/AGM-P161 ]; do
+                echo /vagrant directory still not mounted. Retrying...
+                sleep 5
+        done
+        cd  /vagrant/AGM-P161
         sudo su - vagrant -c "/vagrant/AGM-P161/bin/rails server -e production -d"
         RETVAL=$?
         return $RETVAL
