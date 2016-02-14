@@ -13,7 +13,7 @@ prog="Rails_Server"
 
 start() {
         echo -n $"Starting $prog: "
-        while !(mysql -u root --password='new-password' -e "show databases" -h 10.0.0.2 mysql); do
+        while !(mysql -u root --password='new-password' -e "show databases" -h srvdb01 mysql); do
                 echo DB still not up, retrying....
                 sleep 5
         done
